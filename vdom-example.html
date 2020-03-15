@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    li {
+      color: red;
+    }
+  </style>
+  <script src="./vdom/vnode.js"></script>
+  <script src="./vdom/patch.js"></script>
+</head>
+
+<body>
+  <script>
+    var ul = new VNode("ul", { class: "ul" }, [
+      new VNode("p", { "class": "li" }, [], 'virtual,dom'),
+      new VNode("li", { "class": "li" }, [], "mvvm"),
+      new VNode('li', { class: 'li' }, [], 'virtual dom'),
+      new VNode('input', { type: 'text' }),
+      new VNode('li', { class: 'li' }, [], 'virtual dom'),
+      new VNode('li', {}, [], 'mvvm'),
+      new VNode('li', { class: 'li' }, [], 'buppt')
+    ]);
+    var ul2 = new VNode('ul', { class: 'ul' }, [
+      new VNode('li', { class: 'li' }, [], 'buppt'),
+      new VNode('li', { class: 'li' }, [], 'mvvm'),
+      new VNode('p', {}, [], 'h1 dom'),
+      new VNode('li', { class: 'li' }, [], 'h1 dom'),
+      new VNode('div', {}, [], 'h1 dom'),
+      new VNode('input', { type: 'text' }, []),
+    ]);
+    document.body.appendChild(ul.render());
+    setTimeout(() => {
+      console.log("vnode changed");
+      patch(ul, ul2);
+    }, 2000);  
+  </script>
+</body>
+
+</html>
